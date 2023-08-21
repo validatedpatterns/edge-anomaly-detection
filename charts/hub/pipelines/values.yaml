@@ -1,0 +1,22 @@
+site:
+  name: example
+
+global:
+  pattern: edge-anomaly-detection
+  repoURL: "https://github.com/validatedpatterns/edge-anomaly-detection"
+  targetRevision: main
+
+  git:
+    hostname: github.com
+    account: PLAINTEXT
+    username: PLAINTEXT
+    email: SOMEWHERE@EXAMPLE.COM
+    dev_revision: main
+
+  imageregistry:
+    account: PLAINTEXT
+    hostname: quay.io
+    type: quay
+
+clusterGroup:
+  name: testgroup
