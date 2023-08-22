@@ -196,7 +196,7 @@ spec:
     - name: TAG
       value: $(tasks.bump-build-version.results.image-tag)
     - name: OUTPUT_IMAGE
-      value: image-registry.openshift-image-registry.svc:5000/app-test-all/messaging
+      value: image-registry.openshift-image-registry.svc:5000/edge-test-all/messaging
     - name: CHAINED_BUILD_DOCKERFILE
       value: ""
 
@@ -342,7 +342,7 @@ spec:
     - name: TEMPLATE
       value: stage-production-pipelinerun
     - name: PARAMS
-      value: -p TAG=$(tasks.bump-build-version.results.image-tag) -p CONFIGMAP_PREFIX=IOT_CONSUMER -p SOURCE_IMAGE=image-registry.openshift-image-registry.svc:5000/app-test-all/messaging -p COMPONENT_NAME=iot-consumer
+      value: -p TAG=$(tasks.bump-build-version.results.image-tag) -p CONFIGMAP_PREFIX=IOT_CONSUMER -p SOURCE_IMAGE=image-registry.openshift-image-registry.svc:5000/edge-test-all/messaging -p COMPONENT_NAME=iot-consumer
 
   - name: cleanup
     taskRef:
@@ -360,7 +360,7 @@ spec:
     - name: COMPONENT_NAME
       value: iot-consumer
     # - name: OPENSHIFT_NAMESPACE
-    #   value: app-test-all
+    #   value: edge-test-all
     # - name: OPENSHIFT_IMAGESTREAM
     #   value: messaging
 

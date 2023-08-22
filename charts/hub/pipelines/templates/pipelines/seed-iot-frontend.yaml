@@ -79,11 +79,11 @@ spec:
     - name: BUILDER_IMAGE
       value: nodeshift/ubi8-s2i-web-app
     - name: CHAINED_BUILD_DOCKERFILE
-      value: "FROM quay.io/manuela/httpd-ionic\nCOPY --from=0 /opt/app-root/output /var/www/html/"
+      value: "FROM quay.io/manuela/httpd-ionic\nCOPY --from=0 /opt/edge-root/output /var/www/html/"
     - name: TAG
       value: $(tasks.bump-build-version-iot-frontend.results.image-tag)
     - name: OUTPUT_IMAGE
-      value: image-registry.openshift-image-registry.svc:5000/app-test-all/line-dashboard
+      value: image-registry.openshift-image-registry.svc:5000/edge-test-all/line-dashboard
 
   - name: copy-image-to-remote-registry-iot-frontend
     taskRef:
@@ -97,7 +97,7 @@ spec:
     - name: TAG
       value: $(tasks.bump-build-version-iot-frontend.results.image-tag)
     - name: SOURCE_IMAGE
-      value: image-registry.openshift-image-registry.svc:5000/app-test-all/line-dashboard
+      value: image-registry.openshift-image-registry.svc:5000/edge-test-all/line-dashboard
     - name: TARGET_IMAGE_CONFIGMAPKEY
       value: IOT_FRONTEND_IMAGE
 

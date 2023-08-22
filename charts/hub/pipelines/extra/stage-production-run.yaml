@@ -34,6 +34,6 @@ spec:
 #    - name: CONFIGMAP_PREFIX
 #      value: IOT_CONSUMER
 #    - name: SOURCE_IMAGE
-#      value: image-registry.openshift-image-registry.svc:5000/app-test-all/messaging
+#      value: image-registry.openshift-image-registry.svc:5000/edge-test-all/messaging
 #    - name: COMPONENT_NAME
 #      value: iot_consumer

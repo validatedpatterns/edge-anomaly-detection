@@ -41,7 +41,7 @@ objects:
     - name: S2I_BUILDER_IMAGE
       value: registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift
     - name: LOCAL_IMAGE
-      value: image-registry.openshift-image-registry.svc:5000/app-test-all/machine-sensor
+      value: image-registry.openshift-image-registry.svc:5000/edge-test-all/machine-sensor
     - name: PATH_CONTEXT
       value: components/iot-software-sensor
     - name: COMPONENT_NAME

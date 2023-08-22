@@ -9,9 +9,9 @@ clusterGroup:
     - config-demo
     - hello-world
     - redhat-ods-operator
-    - app-workspace
-    - app-test-all
-    - app-ci
+    - edge-workspace
+    - edge-test-all
+    - edge-ci
     - ml-data-science
     - openshift-pipelines
 
@@ -33,19 +33,19 @@ clusterGroup:
     amqbroker-prod:
       name: amq-broker-rhel8
       channel: 7.10.x
-      namespace: app-test-all
+      namespace: edge-test-all
 
     amqstreams-prod-dev:
       name: amq-streams
       namespaces: 
       - ml-data-science
-      - app-test-all
+      - edge-test-all
 
     camelk-prod-dev:
       name: red-hat-camel-k
       namespaces: 
       - ml-data-science
-      - app-test-all
+      - edge-test-all
 
     openshift-pipelines:
       name: openshift-pipelines-operator-rh
@@ -127,7 +127,7 @@ clusterGroup:
 
     pipelines:
       name: pipelines
-      namespace: app-ci
+      namespace: edge-ci
       project: devops
       path: charts/hub/pipelines
       ignoreDifferences:
