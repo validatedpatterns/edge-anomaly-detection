@@ -38,13 +38,13 @@ clusterGroup:
     amqstreams-prod-dev:
       name: amq-streams
       namespaces: 
-      - ml-data-lake
+      - ml-data-science
       - app-test-all
 
     camelk-prod-dev:
       name: red-hat-camel-k
       namespaces: 
-      - ml-data-lake
+      - ml-data-science
       - app-test-all
 
     openshift-pipelines:
