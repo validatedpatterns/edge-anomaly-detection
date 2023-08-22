@@ -97,7 +97,7 @@ clusterGroup:
       name: data-science
       namespace: redhat-ods-operator
       project: data-science-proj
-      path: charts/all/data-science
+      path: charts/hub/data-science
 
     pipelines:
       name: pipelines
