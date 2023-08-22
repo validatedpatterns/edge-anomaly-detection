@@ -56,6 +56,7 @@ clusterGroup:
     - config-demo
     - hello-world
     - data-science-proj
+    - devops
 
   applications:
     acm:
@@ -115,7 +116,7 @@ clusterGroup:
         kind: DeploymentConfig
         jsonPointers:
         - /spec/template/spec/containers/0/image
-        
+
     test:
       name: edge-test
       namespace: edge-test-all
