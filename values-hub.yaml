@@ -12,7 +12,7 @@ clusterGroup:
     - app-workspace
     - app-test-all
     - app-ci
-    - ml-data-lake
+    - ml-data-science
     - openshift-pipelines
 
 
