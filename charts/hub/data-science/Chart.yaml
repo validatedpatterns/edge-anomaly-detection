@@ -1,0 +1,6 @@
+apiVersion: v2
+description: A Helm chart to configure data-science-dev
+keywords:
+- patterns
+name: data-science-dev
+version: 0.0.1
