@@ -2,11 +2,11 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: admin
-  namespace: manuela-tst-all
+  namespace: edge-test-all
 subjects:
   - kind: ServiceAccount
     name: pipeline
-    namespace: manuela-ci
+    namespace: edge-ci
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

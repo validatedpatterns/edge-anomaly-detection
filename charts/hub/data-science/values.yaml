@@ -1,0 +1,40 @@
+global:
+  datacenter:
+    clustername: hub-XXXXX
+    domain: BASEDOMAIN
+
+  s3:
+    bucket:
+      name: BUCKETNAME
+      region: AWSREGION
+      message:
+        aggregation:
+          count: 50
+      custom:
+        endpoint:
+          enabled: false
+
+clusterGroup:
+  name: datacenter
+  isHubCluster: true
+  managedClusterGroups:
+    edge:
+      name: edge
+      helmOverrides:
+      # Values must be strings!
+      - name: clusterGroup.isHubCluster
+        value: "false"
+      clusterSelector:
+        matchExpressions:
+        - key: vendor
+          operator: In
+          values:
+            - OpenShift
+
+kafka:
+  broker:
+    uri: "prod-kafka-cluster-kafka-bootstrap.data-lake.svc:9092"
+    topic:
+      temperature: "edge.iot-sensor-sw-temperature"
+      vibration: "edge.iot-sensor-sw-vibration"
+

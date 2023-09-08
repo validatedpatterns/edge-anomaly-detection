@@ -26,7 +26,7 @@ spec:
     default: token
     type: string
   # - name: OPENSHIFT_NAMESPACE
-  #   default: app-test-all
+  #   default: edge-test-all
   #   type: string
   # - name: OPENSHIFT_IMAGESTREAM
   #   default: messaging

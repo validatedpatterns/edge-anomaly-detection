@@ -1,0 +1,46 @@
+global:
+  datacenter:
+    clustername: hub-XXXXX
+    domain: BASEDOMAIN
+  s3:
+    bucket:
+      name: BUCKETNAME
+      region: AWSREGION
+      message:
+        aggregation:
+          count: 50
+      custom:
+        endpoint:
+          enabled: false
+
+messaging:
+  vibrationAlert: true
+  vibrationAnomaly: true
+  nodeTlsReject: 0
+
+machineSensor1:
+  port: 80
+
+machineSensor2:
+  port: 80
+  sensorTemperature: false
+
+mqtt:
+  broker:
+    uri: "tcp://broker-amq-mqtt-all-0-svc.edge-tst-all.svc:61616"
+    clientId: "MQTT2KafkaRouteDev"
+    topic:
+      temperature: "iot-sensor/sw/temperature"
+      vibration: "iot-sensor/sw/vibration"
+
+kafka:
+  broker:
+    uri: "dev-kafka-cluster-kafka-bootstrap.edge-tst-all.svc:9092"
+    topic:
+      temperature: "iot-sensor-sw-temperature"
+      vibration: "iot-sensor-sw-vibration"
+
+subscriptions:
+  version:
+    installPlanApproval: Automatic
+    seldon: v1.13.1

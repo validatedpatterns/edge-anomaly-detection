@@ -41,7 +41,7 @@ objects:
     - name: S2I_BUILDER_IMAGE
       value: registry.access.redhat.com/rhscl/python-36-rhel7
     - name: LOCAL_IMAGE
-      value: image-registry.openshift-image-registry.svc:5000/app-test-all/anomaly-detection
+      value: image-registry.openshift-image-registry.svc:5000/edge-test-all/anomaly-detection
     - name: PATH_CONTEXT
       value: components/iot-anomaly-detection
     - name: COMPONENT_NAME

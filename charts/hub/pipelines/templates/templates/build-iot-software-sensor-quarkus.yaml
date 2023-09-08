@@ -41,7 +41,7 @@ objects:
     - name: S2I_BUILDER_IMAGE
       value: quay.io/quarkus/ubi-quarkus-native-s2i:19.3.1-java11
     - name: LOCAL_IMAGE
-      value: image-registry.openshift-image-registry.svc:5000/app-test-all/machine-sensor
+      value: image-registry.openshift-image-registry.svc:5000/edge-test-all/machine-sensor
     - name: PATH_CONTEXT
       value: components/iot-software-sensor-quarkus
     - name: COMPONENT_NAME
