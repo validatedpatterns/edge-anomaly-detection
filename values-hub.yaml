@@ -8,6 +8,8 @@ clusterGroup:
     - golang-external-secrets
     - config-demo
     - hello-world
+    - policies
+    - openshift-storage
     - redhat-ods-operator
     - edge-workspace
     - edge-test-all
@@ -23,7 +25,11 @@ clusterGroup:
     acm:
       name: advanced-cluster-management
       namespace: open-cluster-management
-      channel: release-2.7
+      channel: release-2.8
+
+    odf:
+      name: odf-operator
+      namespace: openshift-storage
 
     ods:
       name: rhods-operator
@@ -81,6 +87,12 @@ clusterGroup:
       namespace: golang-external-secrets
       project: hub
       path: common/golang-external-secrets
+
+    storage:
+      name: storage
+      namespace: openshift-storage
+      project: hub
+      path: charts/hub/odf
 
     config-demo:
       name: config-demo
