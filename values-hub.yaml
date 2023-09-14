@@ -129,11 +129,11 @@ clusterGroup:
         jsonPointers:
         - /spec/template/spec/containers/0/image
 
-    test:
-      name: edge-test
+    edge-anomaly-test:
+      name: edge-anomaly-test
       namespace: edge-test-all
       project: hub
-      path: charts/hub/edge-test
+      path: charts/hub/edge-anomaly-test
       plugin:
         name: helm-with-kustomize
 
