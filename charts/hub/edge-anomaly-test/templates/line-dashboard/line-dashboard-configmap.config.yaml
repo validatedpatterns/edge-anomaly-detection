@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: line-dashboard-configmap
+  namespace: edge-test-all
+  labels:
+    app.kubernetes.io/instance: edge-test-all
+data:
+  "config.json": |-
+    {
+      "websocketHost": "http://messaging-edge-test-all.{{ .Values.global.localClusterDomain }}",
+      "websocketPath": "/api/service-web/socket",
+      "SERVER_TIMEOUT": "20000"
+    }
