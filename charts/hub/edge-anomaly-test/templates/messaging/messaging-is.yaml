@@ -1,0 +1,13 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: messaging
+spec:
+  tags:
+  - name: 0.3.2
+    from:
+      kind: DockerImage
+      name: quay.io/hybridcloudpatterns/iot-consumer:0.3.2
+    importPolicy: {}
+    referencePolicy:
+      type: Local
