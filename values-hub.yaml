@@ -91,7 +91,7 @@ clusterGroup:
       name: storage
       namespace: openshift-storage
       project: hub
-      path: charts/hub/odf
+      path: charts/hub/data-lake/odf
 
     config-demo:
       name: config-demo
