@@ -14,7 +14,13 @@ clusterGroup:
     - edge-workspace
     - edge-test-all
     - edge-ci
-    - ml-data-science
+    - ml-data-science:
+        labels:
+          app.kubernetes.io/instance: edge-anomaly-detection-hub
+          kubernetes.io/metadata.name: ml-data-science
+          argocd.argoproj.io/managed-by: edge-anomaly-detection-hub
+          modelmesh-enabled: 'true'
+          opendatahub.io/dashboard: 'true'
     - openshift-pipelines
 
 
@@ -34,6 +40,7 @@ clusterGroup:
     ods:
       name: rhods-operator
       channel: stable
+      namespace: redhat-ods-operator
 
     amqbroker-prod:
       name: amq-broker-rhel8
