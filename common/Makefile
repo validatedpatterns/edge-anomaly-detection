@@ -44,6 +44,13 @@ help: ## This help message
 show: ## show the starting template without installing it
 	helm template common/operator-install/ --name-template $(NAME) $(HELM_OPTS)
 
+preview-all:
+	@common/scripts/preview-all.sh $(TARGET_REPO) $(TARGET_BRANCH)
+
+preview-%:
+	CLUSTERGROUP?=$(shell yq ".main.clusterGroupName" values-global.yaml)
+	@common/scripts/preview.sh $(CLUSTERGROUP) $* $(TARGET_REPO) $(TARGET_BRANCH)
+
 .PHONY: operator-deploy
 operator-deploy operator-upgrade: validate-prereq validate-origin validate-cluster ## runs helm install
 	@set -e -o pipefail
@@ -122,14 +129,46 @@ validate-prereq: ## verify pre-requisites
 	@if ! ansible-galaxy collection list | grep kubernetes.core > /dev/null 2>&1; then echo "Not found"; exit 1; fi
 	@echo "OK"
 
+.PHONY: argo-healthcheck
+argo-healthcheck: ## Checks if all argo applications are synced
+	@echo "Checking argo applications"
+	$(eval APPS := $(shell oc get applications -A -o jsonpath='{range .items[*]}{@.metadata.namespace}{","}{@.metadata.name}{"\n"}{end}'))
+	@NOTOK=0; \
+	for i in $(APPS); do\
+		n=`echo "$${i}" | cut -f1 -d,`;\
+		a=`echo "$${i}" | cut -f2 -d,`;\
+		STATUS=`oc get -n "$${n}" application/"$${a}" -o jsonpath='{.status.sync.status}'`;\
+		if [[ $$STATUS != "Synced" ]]; then\
+			NOTOK=$$(( $${NOTOK} + 1));\
+		fi;\
+		HEALTH=`oc get -n "$${n}" application/"$${a}" -o jsonpath='{.status.health.status}'`;\
+		if [[ $$HEALTH != "Healthy" ]]; then\
+			NOTOK=$$(( $${NOTOK} + 1));\
+		fi;\
+		echo "$${n} $${a} -> Sync: $${STATUS} - Health: $${HEALTH}";\
+	done;\
+	if [ $${NOTOK} -gt 0 ]; then\
+	    echo "Some applications are not synced or are unhealthy";\
+	    exit 1;\
+	fi
+
+
 ##@ Test and Linters Tasks
 
 CHARTS=$(shell find . -type f -iname 'Chart.yaml' -exec dirname "{}"  \; | grep -v examples | sed -e 's/.\///')
 # Section related to tests and linting
-TEST_OPTS= -f values-global.yaml --set global.repoURL="https://github.com/pattern-clone/mypattern" \
-	--set main.git.repoURL="https://github.com/pattern-clone/mypattern" --set main.git.revision=main --set global.pattern="mypattern" \
-	--set global.namespace="pattern-namespace" --set global.hubClusterDomain=apps.hub.example.com --set global.localClusterDomain=apps.region.example.com --set global.clusterDomain=region.example.com\
-	--set "clusterGroup.imperative.jobs[0].name"="test" --set "clusterGroup.imperative.jobs[0].playbook"="ansible/test.yml"
+TEST_OPTS= -f values-global.yaml \
+	--set global.repoURL="https://github.com/pattern-clone/mypattern" \
+	--set main.git.repoURL="https://github.com/pattern-clone/mypattern" \
+	--set main.git.revision=main --set global.pattern="mypattern" \
+	--set global.namespace="pattern-namespace" \
+	--set global.hubClusterDomain=apps.hub.example.com \
+	--set global.localClusterDomain=apps.region.example.com \
+	--set global.clusterDomain=region.example.com \
+	--set global.clusterVersion="4.12" \
+	--set global.clusterPlatform=aws \
+	--set "clusterGroup.imperative.jobs[0].name"="test" \
+	--set "clusterGroup.imperative.jobs[0].playbook"="ansible/test.yml"
 PATTERN_OPTS=-f common/examples/values-example.yaml
 EXECUTABLES=git helm oc ansible
 
